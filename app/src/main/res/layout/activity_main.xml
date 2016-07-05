@@ -24,23 +24,16 @@ limitations under the License.
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sample.HelloLiveUpdateSwift.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:background="#98A66E"
-        android:textColor="#ffffff"
-        android:width="300dp"
-        android:onClick="helloLiveUpdate" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
 
         <ImageButton
             android:layout_width="0dp"
@@ -110,5 +103,33 @@ limitations under the License.
             android:onClick="selectCountry"
             android:background="@drawable/de" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/select_a_country"
+        android:id="@+id/selectCountry"
+        android:textSize="15sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/linearLayout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/helloText"
+        android:layout_below="@+id/linearLayout"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:layout_width="300sp"
+        android:layout_height="300sp"
+        android:id="@+id/mapImageView"
+        android:layout_alignTop="@+id/helloText"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
