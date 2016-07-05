@@ -16,22 +16,28 @@
 
 package com.sample.HelloLiveUpdateSwift;
 
-import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.worklight.ibmmobilefirstplatformfoundationliveupdate.LiveUpdateManager;
 import com.worklight.ibmmobilefirstplatformfoundationliveupdate.api.Configuration;
 import com.worklight.ibmmobilefirstplatformfoundationliveupdate.api.ConfigurationListener;
 import com.worklight.wlclient.api.WLClient;
 
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
     private String countryCode = "US";
-    ImageButton selectedCountry;
+    private ImageButton selectedCountry;
+    private TextView helloTextView;
+    private ImageView mapImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,39 +45,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         selectedCountry = (ImageButton) findViewById(R.id.us);
+        helloTextView = (TextView) findViewById(R.id.helloText);
+        mapImageView = (ImageView) findViewById(R.id.mapImageView);
         selectCountry (selectedCountry);
-    }
-
-    public void helloLiveUpdate (View v){
-        LiveUpdateManager.getInstance().obtainConfiguration(countryCode, new ConfigurationListener() {
-            @Override
-            public void onSuccess(final Configuration configuration) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showAlertDialog (configuration.getProperty("helloText"));
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(com.worklight.wlclient.api.WLFailResponse wlFailResponse) {
-                Log.e("Hello Live Update", wlFailResponse.getErrorMsg());
-            }
-        });
-    }
-
-    public void showAlertDialog (String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Hello Live Update");
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
     }
 
     public void selectCountry(View v) {
@@ -86,5 +62,46 @@ public class MainActivity extends AppCompatActivity {
         selectedCountry.setEnabled(false);
         countryCode = (String) selectedCountry.getTag();
         selectedCountry.getDrawable().setAlpha(90);
+
+        LiveUpdateManager.getInstance().obtainConfiguration(countryCode, new ConfigurationListener() {
+            @Override
+            public void onSuccess(final Configuration configuration) {
+                String mapUrl = configuration.getProperty("mapUrl");
+                if (configuration.isFeatureEnabled("includeMap") && mapUrl != null) {
+                    try {
+                        URL url = new URL(mapUrl);
+                        final Bitmap bmpMapImage = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mapImageView.setImageBitmap(bmpMapImage);
+                            }
+                        });
+                    } catch (Exception e) {
+                        Log.e("Hello Live Update", "Cannot fetch the map image. URL: " + mapUrl + " Error: " + e.getMessage(), e);
+                    }
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mapImageView.setImageResource(android.R.color.transparent);
+                        }
+                    });
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        helloTextView.setText(configuration.getProperty("helloText"));
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(com.worklight.wlclient.api.WLFailResponse wlFailResponse) {
+                Log.e("Hello Live Update", wlFailResponse.getErrorMsg());
+            }
+        });
     }
 }
