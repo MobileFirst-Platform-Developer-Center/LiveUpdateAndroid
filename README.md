@@ -26,8 +26,12 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/using-the-m
 
   Each segment gets the default value from the schema. Change each one according to the language. For example, for French add: **helloText** - **Bonjour le monde**.
 
-6. From a command-line window, navigate to the project's root folder and run the command `mfpdev app register` to register the application.
-7. In Android Studio, run the App.
+4. In **MobileFirst Operations Console → [your application] → Live Update Settings → Segments tab**, click on the **Properties** link that belongs to **FR**.
+  * Click the **Edit** icon and provide a link to an image that representes for example the France geography map.
+  * To see the map while using the app, you need to enable to `includeMap` feature.
+
+5. From a command-line window, navigate to the project's root folder and run the command `mfpdev app register` to register the application.
+6. In Android Studio, run the App.
 
 #### Note
 To be able to immediatly experience changes, go to the **Live Update Settings** configuration tab and set the `expirationPeriod` to a smaller value (e.g: 5 seconds).
