@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sample.HelloLiveUpdateSwift;
+package com.sample.HelloLiveUpdate;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
