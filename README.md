@@ -11,27 +11,21 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/using-the-m
 
 1. Download and deploy the Live Update adapter [as instructed in the tutorial](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/using-the-mfpf-sdk/live-update/#adding-live-update-to-mobilefirst-server).
 2. Add a scope mapping for **configuration-user-login** in **MobileFirst Operations Console → [your application] → Security tab → Scope-Elements Mapping**.
-3. Import the Live Update schema and segment for the sample
-  * [Click to download](https://www.github.com/MobileFirst-Platform-Developer-Center/LiveUpdateSwift/blob/release80/scheme.txt) the scheme for the sample
-  * [Follow the instructions in the tutorial](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/using-the-mfpf-sdk/live-update/#import-export) to upload the schema
-3. Add segments:
-  * In **MobileFirst Operations Console → [your application] → Live Update Settings → Segments tab**, add the following segments IDs:
+3. [Import the Live Update schema and segments](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/using-the-mfpf-sdk/live-update/#import-export) for the sample application:
+ * [schema](https://raw.githubusercontent.com/MobileFirst-Platform-Developer-Center/LiveUpdateSwift/release80/schema.txt)
+ * [segments](https://raw.githubusercontent.com/MobileFirst-Platform-Developer-Center/LiveUpdateSwift/release80/segments.txt)  
+4. From a command-line window, navigate to the project's root folder and run the command `mfpdev app register` to register the application.
+5. In Android Studio, run the app in the Android Emulator or a physical device.
+
+> **Tip:** you can update the bundled SDK by running the command `pod update` from the project's root folder.
+
+#### Changing Live Update Settings
+Each segment gets the default value from the schema. Change each one according to the language. For example, for French add: **helloText** - **Bonjour le monde**.
+
+In **MobileFirst Operations Console → [your application] → Live Update Settings → Segments tab**, click on the **Properties** link that belongs, for example, to **FR**.
   
-  1. DE
-  2. FR
-  3. ES
-  4. UK
-  5. IT
-  6. US
-
-  Each segment gets the default value from the schema. Change each one according to the language. For example, for French add: **helloText** - **Bonjour le monde**.
-
-4. In **MobileFirst Operations Console → [your application] → Live Update Settings → Segments tab**, click on the **Properties** link that belongs to **FR**.
-  * Click the **Edit** icon and provide a link to an image that representes for example the France geography map.
-  * To see the map while using the app, you need to enable to `includeMap` feature.
-
-5. From a command-line window, navigate to the project's root folder and run the command `mfpdev app register` to register the application.
-6. In Android Studio, run the App.
+* Click the **Edit** icon and provide a link to an image that representes for example the France geography map.
+* To see the map while using the app, you need to enable to `includeMap` feature.
 
 #### Note
 To be able to immediatly experience changes, go to the **Live Update Settings** configuration tab and set the `expirationPeriod` to a smaller value (e.g: 5 seconds).
