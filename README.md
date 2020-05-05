@@ -13,7 +13,7 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/application
 
 1. From a command-line window, navigate to the project's root folder and run the following commands:
     - `mfpdev app register` - to register the application in the MobileFirst Server.
-    - `mfpdev app pull` - to add the `liveupdate.mobileclient` scope in scope elements mappings section of security.
+    - `mfpdev app push` - to add the `liveupdate.mobileclient` scope in scope elements mappings section of security.
 
 2. Add Liveupdate Features & Properties as shown below in **MobileFirst Operations Console → [your application] → Liveupdate Settings → Schema**.
 
