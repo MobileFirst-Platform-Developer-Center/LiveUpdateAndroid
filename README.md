@@ -2,7 +2,7 @@ IBM MobileFirst Foundation
 ===
 ## Hello Live Update
 
-In the sample application, User can roll feature and the properties remotely using Liveupdate Feature of MobileFirst Foundation
+In the sample application, User can roll out the feature and the properties remotely using Liveupdate Feature of MobileFirst Foundation
 
 ### Tutorials
 https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/application-development/live-update-service/
